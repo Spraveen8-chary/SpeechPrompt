@@ -1,0 +1,5 @@
+task: asr
+lr: 5e-3
+prompt_type: input
+prompt_len: 50
+epochs: 30

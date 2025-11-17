@@ -1,0 +1,24 @@
+task: speech_classification
+
+gslm_ckpt: pretrained/hubert100_lm/checkpoint_best_fixed.pt
+vocab_size: 100
+prompt_len: 20
+hidden_dim: 1024
+lr: 5e-3
+batch_size: 16
+epochs: 10
+patience: 3
+
+device: auto
+prompt_type: input
+
+# ---------------------------
+# FAST DEBUG MODE SETTINGS
+# ---------------------------
+fast_debug: true        
+samples_per_class: 30    
+
+datasets:
+  - name: speech_commands
+    path: data/processed/speech_commands/units
+    num_classes: 36       

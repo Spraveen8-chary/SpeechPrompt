@@ -1,0 +1,23 @@
+# ==========================
+# PromptSpeech FastDebug Config
+# ==========================
+
+gslm_ckpt: "checkpoints/gslm.pt"     # <-- your GSLM checkpoint path
+max_len: 200
+batch_size: 8
+epochs: 5
+lr: 0.005
+prompt_len: 20
+hidden_dim: 1024
+patience: 3
+vocab_size: 100
+
+# ---------------------------
+# FAST DEBUG MODE SETTINGS
+# ---------------------------
+fast_debug: true
+samples_per_class: 30     # → 30 samples × 36 classes = 1080 total
+
+datasets:
+  - name: speech_commands
+    path: "datasets/speech_commands_npy"   # <-- Path to your .npy files

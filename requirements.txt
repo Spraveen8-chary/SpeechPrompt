@@ -1,0 +1,13 @@
+torch
+torchaudio
+transformers
+fairseq
+scikit-learn
+librosa
+soundfile
+numpy
+pandas
+tqdm
+jiwer
+sacrebleu
+matplotlib

@@ -1,0 +1,4 @@
+model: unit_mbart
+vocab_size: 1000
+prompt_len: 50
+device: cuda

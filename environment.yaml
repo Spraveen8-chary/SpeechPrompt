@@ -1,0 +1,22 @@
+name: promptspeech
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - torch
+    - torchaudio
+    - torchvision
+    - transformers
+    - fairseq
+    - scikit-learn
+    - librosa
+    - soundfile
+    - numpy
+    - pandas
+    - tqdm
+    - jiwer
+    - sacrebleu
+    - matplotlib

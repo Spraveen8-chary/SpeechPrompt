@@ -1,0 +1,14 @@
+model: gslm
+device: cuda
+vocab_size: 100
+prompt_len: 180
+deep: true
+
+# GSLM backbone
+pretrained_path: pretrained/hubert100_lm/checkpoint_best.pt
+
+# Feature extractor (HuBERT)
+hubert_path: pretrained/hubert_base_ls960.pt
+
+# KMeans model
+kmeans_path: data/kmeans/km.bin

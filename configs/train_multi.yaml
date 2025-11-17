@@ -1,0 +1,17 @@
+task: speech_classification
+gslm_ckpt: pretrained/hubert100_lm/checkpoint_best_fixed.pt
+vocab_size: 100
+prompt_len: 20
+hidden_dim: 1024
+lr: 5e-3
+batch_size: 8
+epochs: 30
+patience: 5
+
+datasets:
+  - name: speech_commands
+    path: data/processed/speech_commands_units
+  - name: librispeech
+    path: data/processed/librispeech_units
+  - name: ljspeech
+    path: data/processed/ljspeech_units

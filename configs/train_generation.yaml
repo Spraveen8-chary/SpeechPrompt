@@ -1,0 +1,5 @@
+task: speech_generation
+lr: 5e-3
+prompt_type: deep
+prompt_len: 200
+epochs: 20
