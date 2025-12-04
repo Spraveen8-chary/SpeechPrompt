@@ -1,0 +1,8 @@
+flask
+openai-whisper
+torch
+numpy
+soundfile
+ollama
+
+# winget install ffmpeg

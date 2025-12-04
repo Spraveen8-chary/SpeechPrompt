@@ -1,0 +1,117 @@
+(.venv) PS D:\SpeechPrompt\PromptSpeech> python -m src.training.train_prompt --config configs/train_asr.yaml
+✅ Registered FINAL robust safe globals for Fairseq/OmegaConf checkpoint loading.
+   Registered 45 types (examples): ['bytearray', 'StringNode', 'Union', 'FileNotFoundError', 'Optional', 'DictConfig', 'Namespace', 'ContainerMetadata', 'IntegerNode', 'StopIteration', 'FloatNode', 'Dict', 'Dictionary', 'AnyNode', 'EnumNode', 'deque', 'float', 'MemoryError', 'ValueNode', 'int', 'MissingMandatoryValue', 'bytes', 'BooleanNode', 'dict', 'ValidationError', 'Container', 'defaultdict', 'set', 'tuple', 'str']
+🖥 Using device: cpu
+
+📂 Loading dataset: librispeech_dev_clean
+   → Total samples found: 2703
+   → Total classes: 97
+⚡ FastDebug enabled → Selecting 50 samples per class
+     Class '105575' → 30 samples selected
+     Class '110124' → 26 samples selected
+     Class '110523' → 22 samples selected
+     Class '111771' → 10 samples selected
+     Class '118436' → 24 samples selected
+     Class '121123' → 29 samples selected
+     Class '121550' → 36 samples selected
+     Class '122949' → 36 samples selected
+     Class '126732' → 50 samples selected
+     Class '128104' → 15 samples selected
+     Class '129742' → 21 samples selected
+     Class '130726' → 36 samples selected
+     Class '130737' → 14 samples selected
+     Class '135031' → 25 samples selected
+     Class '136532' → 24 samples selected
+     Class '137482' → 49 samples selected
+     Class '137823' → 27 samples selected
+     Class '138058' → 41 samples selected
+     Class '141231' → 33 samples selected
+     Class '142785' → 50 samples selected
+     Class '142845' → 50 samples selected
+     Class '143396' → 21 samples selected
+     Class '143397' → 21 samples selected
+     Class '147149' → 31 samples selected
+     Class '147956' → 30 samples selected
+     Class '147960' → 17 samples selected
+     Class '147961' → 41 samples selected
+     Class '147964' → 11 samples selected
+     Class '147965' → 9 samples selected
+     Class '147966' → 7 samples selected
+     Class '148538' → 16 samples selected
+     Class '149214' → 5 samples selected
+     Class '149220' → 50 samples selected
+     Class '149874' → 22 samples selected
+     Class '149896' → 35 samples selected
+     Class '149897' → 38 samples selected
+     Class '152373' → 19 samples selected
+     Class '153947' → 17 samples selected
+     Class '153948' → 16 samples selected
+     Class '153954' → 25 samples selected
+     Class '154320' → 15 samples selected
+     Class '154328' → 24 samples selected
+     Class '15664' → 47 samples selected
+     Class '161169' → 18 samples selected
+     Class '163249' → 50 samples selected
+     Class '166546' → 50 samples selected
+     Class '168635' → 23 samples selected
+     Class '170138' → 28 samples selected
+     Class '170142' → 43 samples selected
+     Class '170145' → 23 samples selected
+     Class '23268' → 31 samples selected
+     Class '244435' → 41 samples selected
+     Class '24615' → 15 samples selected
+     Class '24640' → 10 samples selected
+     Class '24833' → 29 samples selected
+     Class '275154' → 28 samples selected
+     Class '275155' → 33 samples selected
+     Class '275156' → 14 samples selected
+     Class '275224' → 21 samples selected
+     Class '281318' → 24 samples selected
+     Class '284437' → 34 samples selected
+     Class '286674' → 18 samples selected
+     Class '302196' → 13 samples selected
+     Class '302201' → 16 samples selected
+     Class '302203' → 12 samples selected
+     Class '304647' → 14 samples selected
+     Class '34615' → 22 samples selected
+     Class '34622' → 24 samples selected
+     Class '34629' → 34 samples selected
+     Class '43358' → 20 samples selected
+     Class '43359' → 19 samples selected
+     Class '43363' → 20 samples selected
+     Class '4943' → 31 samples selected
+     Class '4944' → 50 samples selected
+     Class '50561' → 20 samples selected
+     Class '57405' → 13 samples selected
+     Class '61943' → 28 samples selected
+     Class '61946' → 24 samples selected
+     Class '64025' → 24 samples selected
+     Class '64029' → 33 samples selected
+     Class '64038' → 26 samples selected
+     Class '64257' → 21 samples selected
+     Class '64301' → 33 samples selected
+     Class '64726' → 21 samples selected
+     Class '66125' → 28 samples selected
+     Class '66129' → 36 samples selected
+     Class '66616' → 26 samples selected
+     Class '73752' → 20 samples selected
+     Class '76958' → 32 samples selected
+     Class '8226' → 33 samples selected
+     Class '83699' → 43 samples selected
+     Class '83705' → 44 samples selected
+     Class '84280' → 16 samples selected
+     Class '9006' → 21 samples selected
+     Class '9008' → 17 samples selected
+     Class '93302' → 30 samples selected
+     Class '93306' → 26 samples selected
+🔥 Final subset size for librispeech_dev_clean: 2588 samples
+
+📦 Total training samples across all datasets: 2588
+
+🔹 Loading frozen GSLM model...
+2025-12-03 10:39:23 | INFO | fairseq.tasks.language_modeling | dictionary: 104 types
+Epoch 1/1: 100%|███████████████████████████████████████████| 324/324 [2:07:18<00:00, 23.58s/it] 
+🎯 Epoch 1/1 | Loss=5.0711 | Acc=1.55%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+🏁 Training finished. Best accuracy: 1.55%
+(.venv) PS D:\SpeechPrompt\PromptSpeech> 

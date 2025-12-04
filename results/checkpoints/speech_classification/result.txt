@@ -1,0 +1,79 @@
+(.venv) PS D:\SpeechPrompt\PromptSpeech> python -m src.training.train_prompt --config configs/train_classification.yaml
+✅ Registered FINAL robust safe globals for Fairseq/OmegaConf checkpoint loading.
+   Registered 45 types (examples): ['bytearray', 'FileNotFoundError', 'BooleanNode', 'Any', 'ValueNode', 'StopIteration', 'EnumNode', 'Union', 'Container', 'Optional', 'ValidationError', 'ContainerMetadata', 'deque', 'float', 'Tuple', 'List', 'MemoryError', 'ListConfig', 'int', 'bytes', 'dict', 'defaultdict', 'set', 'ReadonlyConfigError', 'Enum', 'tuple', 'str', 'Dict', 'StringNode', 'UnsupportedValueType']
+🖥 Using device: cpu
+
+📂 Loading dataset: speech_commands
+   → Total samples found: 105835
+   → Total classes: 36
+⚡ FastDebug enabled → Selecting 30 samples per class
+     Class '_background_noise_' → 6 samples selected
+     Class 'backward' → 30 samples selected
+     Class 'bed' → 30 samples selected
+     Class 'bird' → 30 samples selected
+     Class 'cat' → 30 samples selected
+     Class 'dog' → 30 samples selected
+     Class 'down' → 30 samples selected
+     Class 'eight' → 30 samples selected
+     Class 'five' → 30 samples selected
+     Class 'follow' → 30 samples selected
+     Class 'forward' → 30 samples selected
+     Class 'four' → 30 samples selected
+     Class 'go' → 30 samples selected
+     Class 'happy' → 30 samples selected
+     Class 'house' → 30 samples selected
+     Class 'learn' → 30 samples selected
+     Class 'left' → 30 samples selected
+     Class 'marvin' → 30 samples selected
+     Class 'nine' → 30 samples selected
+     Class 'no' → 30 samples selected
+     Class 'off' → 30 samples selected
+     Class 'on' → 30 samples selected
+     Class 'one' → 30 samples selected
+     Class 'right' → 30 samples selected
+     Class 'seven' → 30 samples selected
+     Class 'sheila' → 30 samples selected
+     Class 'six' → 30 samples selected
+     Class 'stop' → 30 samples selected
+     Class 'three' → 30 samples selected
+     Class 'tree' → 30 samples selected
+     Class 'two' → 30 samples selected
+     Class 'up' → 30 samples selected
+     Class 'visual' → 30 samples selected
+     Class 'wow' → 30 samples selected
+     Class 'yes' → 30 samples selected
+     Class 'zero' → 30 samples selected
+🔥 Final subset size for speech_commands: 1056 samples
+
+📦 Total training samples across all datasets: 1056
+
+🔹 Loading frozen GSLM model...
+2025-11-15 12:10:22 | INFO | fairseq.tasks.language_modeling | dictionary: 104 types
+Epoch 1/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [37:35<00:00, 34.18s/it] 
+🎯 Epoch 1/10 | Loss=3.8941 | Acc=3.03%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+Epoch 2/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [34:20<00:00, 31.22s/it]
+🎯 Epoch 2/10 | Loss=3.7459 | Acc=2.37%
+Epoch 3/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [29:23<00:00, 26.72s/it]
+🎯 Epoch 3/10 | Loss=3.7592 | Acc=2.56%
+Epoch 4/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [29:46<00:00, 27.07s/it]
+🎯 Epoch 4/10 | Loss=3.7470 | Acc=3.69%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+Epoch 5/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [30:00<00:00, 27.28s/it] 
+🎯 Epoch 5/10 | Loss=3.7397 | Acc=3.12%
+Epoch 6/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [30:01<00:00, 27.30s/it] 
+🎯 Epoch 6/10 | Loss=3.7056 | Acc=3.79%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+Epoch 7/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [29:59<00:00, 27.27s/it] 
+🎯 Epoch 7/10 | Loss=3.7235 | Acc=3.12%
+Epoch 8/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [32:58<00:00, 29.98s/it] 
+🎯 Epoch 8/10 | Loss=3.6774 | Acc=4.17%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+Epoch 9/10: 100%|████████████████████████████████████████████████████████████████████████| 66/66 [33:13<00:00, 30.20s/it]
+🎯 Epoch 9/10 | Loss=3.5333 | Acc=5.78%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+Epoch 10/10: 100%|███████████████████████████████████████████████████████████████████████| 66/66 [33:46<00:00, 30.71s/it]
+🎯 Epoch 10/10 | Loss=3.4461 | Acc=7.77%
+💾 Saved best model → results\checkpoints\promptspeech_best.pt
+🏁 Training finished. Best accuracy: 7.77%
+(.venv) PS D:\SpeechPrompt\PromptSpeech> 
