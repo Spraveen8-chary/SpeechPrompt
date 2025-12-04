@@ -1,5 +1,26 @@
 task: asr
-lr: 5e-3
-prompt_type: input
+gslm_ckpt: pretrained/hubert100_lm/checkpoint_best_fixed.pt
+
+vocab_size: 100
+hidden_dim: 1024
 prompt_len: 50
-epochs: 30
+lr: 5e-3
+batch_size: 4
+epochs: 3
+patience: 3
+
+device: auto
+prompt_type: deep
+
+fast_debug: true
+samples_per_class: 2
+
+datasets:
+  - name: librispeech_dev_clean
+    path: data/units/libri/dev-clean
+
+
+save_dir: results/checkpoints/asr_librispeech
+
+
+# python -m src.training.train_prompt --config configs/train_asr.yaml
