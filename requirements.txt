@@ -11,3 +11,4 @@ tqdm
 jiwer
 sacrebleu
 matplotlib
+flask

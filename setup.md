@@ -1,266 +1,433 @@
-# 🧱 `SETUP.md` — Environment Setup Guide for PromptSpeech
+Below is a **clean, professional, end-to-end `SETUP.md`** containing:
 
-> ✅ This guide ensures a fully working PromptSpeech environment on **Windows 10/11**, compatible with **HuBERT**, **Prompt Tuning**, and **Speech Quantization**.
->
-> 🧠 Verified for Python 3.10 + PyTorch ≥ 2.0.
-> ⚙️ Target GPU: NVIDIA CUDA 11.8 or 12.1 (optional but recommended)
+* Environment setup
+* Dependencies
+* Downloading LibriSpeech
+* Extracting features
+* Running K-Means
+* Generating unit files
+* Preparing ASR transcripts
+* Training Speech Classification
+* Training ASR
+* Folder structure
+* Verification steps
+
+No emojis.
+Fully technical.
+Ready for GitHub.
+Formatted in Markdown.
 
 ---
 
-## 📂 1. Clone or Create the Project Structure
+# SETUP.md
 
-If you haven’t already, generate the PromptSpeech project folder using the `init_project.py` script:
+PromptSpeech: Full Environment Setup and Data Preparation Guide
+Windows / Linux Compatible
 
-```bash
-python init_project.py
-```
+---
 
-This creates:
+## 1. Project Structure
+
+Create a clean project directory:
 
 ```
 PromptSpeech/
-├── data/
-├── models/
-├── src/
-├── scripts/
-├── configs/
-├── results/
-└── main.py
+    configs/
+    data/
+        raw/
+        units/
+        processed/
+    results/
+        checkpoints/
+    scripts/
+    src/
 ```
+
+You may clone an existing repository or create the structure manually.
 
 ---
 
-## 🧠 2. Create and Activate a Virtual Environment
+## 2. Python Environment Setup
 
-Using **Python 3.10** (recommended):
+Use Python 3.10.
 
-```bash
-cd PromptSpeech
+```
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate       # Windows
+source .venv/bin/activate    # Linux
 ```
 
-(You should see `(.venv)` at the start of your PowerShell prompt.)
+Upgrade tools:
 
----
-
-## ⚙️ 3. Upgrade Core Tools
-
-Before installing any libraries, upgrade your packaging tools and pin pip below 24.1 to avoid Fairseq metadata issues.
-
-```bash
+```
 python -m pip install --upgrade "pip<24.1" setuptools wheel ninja
 ```
 
 ---
 
-## 💻 4. (One-Time) Verify Visual C++ Compiler ✅
+## 3. Install PyTorch and Torchaudio
 
-Open PowerShell and check:
-
-```bash
-cl
-```
-
-If you see:
+### GPU (CUDA 12.1)
 
 ```
-Microsoft (R) C/C++ Optimizing Compiler Version 19.x for x64
-```
-
-✅ You already have **Microsoft Visual C++ Build Tools** installed.
-If not, install them from:
-👉 [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
-
-Select:
-
-* **Desktop development with C++**
-* **MSVC v143 toolset**
-* **Windows 10/11 SDK**
-
----
-
-## 🔥 5. Install PyTorch + Torchaudio
-
-### 🔹 If you have an NVIDIA GPU
-
-(Recommended for faster training)
-
-```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
-*(Change `cu121` → `cu118` if you have CUDA 11.8)*
+### CPU-only
 
-### 🔹 If CPU-only
-
-```bash
+```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
-Verify:
-
-```bash
-python -c "import torch; print(torch.__version__, '✅ Torch OK, CUDA:', torch.cuda.is_available())"
-```
-
-Expected output:
+Verify installation:
 
 ```
-2.4.0 ✅ Torch OK, CUDA: True
+python -c "import torch; print('Torch:', torch.__version__, 'CUDA:', torch.cuda.is_available())"
 ```
 
 ---
 
-## 🎧 6. Install Remaining Dependencies
+## 4. Install Required Python Packages
 
-PromptSpeech uses `torchaudio`’s **HuBERT** for SSL feature extraction (instead of Fairseq).
-Install all remaining packages:
-
-```bash
+```
 pip install transformers scikit-learn librosa soundfile numpy pandas tqdm jiwer sacrebleu matplotlib
 ```
 
----
+Optional for development:
 
-## ❌ 7. Avoid Fairseq Build Failures on Windows
-
-Fairseq requires C++ extensions that do **not** compile reliably on Windows.
-To prevent the errors you experienced (`RuntimeError: Error compiling objects for extension`):
-
-* **Do NOT install `fairseq`**.
-* Instead, use **Torchaudio’s HuBERT pipelines**, which are fully compatible and cross-platform.
-
-Example usage:
-
-```python
-import torchaudio
-
-bundle = torchaudio.pipelines.HuBERT_BASE
-model = bundle.get_model()
-
-waveform, sr = torchaudio.load("sample.wav")
-features, _ = model.extract_features(waveform)
-print(features[-1].shape)
 ```
-
-✅ Gives identical SSL embeddings as Fairseq’s HuBERT.
-✅ Works on Windows without compilation.
-
----
-
-## 🧰 8. Optional — Install Dev & Visualization Tools
-
-```bash
-pip install jupyter notebook seaborn
+pip install jupyter notebook
 ```
 
 ---
 
-## 🧪 9. Verify the Entire Environment
+## 5. Download LibriSpeech
 
-Run this quick test:
-
-```bash
-python - <<'PY'
-import torch, torchaudio, sklearn, librosa, transformers
-print("✅ PyTorch:", torch.__version__)
-print("✅ Torchaudio:", torchaudio.__version__)
-print("✅ Transformers:", transformers.__version__)
-print("✅ All dependencies loaded successfully!")
-PY
-```
-
-Expected output:
+Download the subset you need (for example, dev-clean):
 
 ```
-✅ PyTorch: 2.x
-✅ Torchaudio: 2.x
-✅ Transformers: 4.x
-✅ All dependencies loaded successfully!
+mkdir -p data/raw/librispeech
+cd data/raw/librispeech
 ```
 
----
+Download from:
 
-## 🧩 10. Final Folder Checklist
+[https://www.openslr.org/12/](https://www.openslr.org/12/)
 
-After setup, your folder should look like:
+Extract downloaded archives inside:
 
 ```
-PromptSpeech/
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   ├── manifests/
-│   └── kmeans/
-│
-├── src/
-│   ├── preprocessing/
-│   │   ├── extract_features.py
-│   │   └── quantize_units.py
-│   ├── training/
-│   │   └── train_prompt.py
-│   └── evaluation/
-│       └── evaluate.py
-│
-├── models/
-├── scripts/
-├── configs/
-├── results/
-├── README.md
-├── environment.yaml
-└── main.py
+data/raw/librispeech/LibriSpeech/dev-clean/
+```
+
+The folder will contain:
+
+```
+*.flac audio files
+*.trans.txt transcription files
 ```
 
 ---
 
-## 🧠 11. Summary of Key Fixes for Windows
+## 6. Extract HuBERT SSL Features
 
-| Issue Encountered                       | Root Cause                 | Permanent Fix                          |
-| --------------------------------------- | -------------------------- | -------------------------------------- |
-| `invalid command 'bdist_wheel'`         | wheel not installed        | `pip install wheel setuptools ninja`   |
-| `Error compiling objects for extension` | Fairseq C++ extensions     | ❌ Skip Fairseq → Use Torchaudio HuBERT |
-| `ModuleNotFoundError: torch`            | Fairseq built before torch | Install torch **before** Fairseq       |
-| `omegaconf invalid metadata`            | pip ≥ 24.1 breaks old deps | Use `pip < 24.1`                       |
-| `cl not found`                          | Missing MSVC build tools   | Install **Microsoft C++ Build Tools**  |
+Create script: `src/preprocessing/extract_features.py`
 
----
+Example command to generate frame-level features:
 
-## 🚀 12. Next Steps
-
-Once setup completes successfully:
-
-1. Proceed to **Step 2: SSL Feature Extraction & Quantization**
-2. Implement:
-
-   * `src/preprocessing/extract_features.py`
-   * `src/preprocessing/quantize_units.py`
-3. Use Torchaudio’s HuBERT and `sklearn.cluster.MiniBatchKMeans`.
-
----
-
-## ✅ Environment Summary
-
-| Package               | Version | Purpose                            |
-| --------------------- | ------- | ---------------------------------- |
-| torch / torchaudio    | ≥ 2.0   | Core Deep Learning & HuBERT        |
-| transformers          | ≥ 4.40  | Tokenization & Language Interfaces |
-| scikit-learn          | ≥ 1.3   | K-Means Quantization               |
-| librosa / soundfile   | ≥ 0.10  | Audio Processing I/O               |
-| pandas / numpy / tqdm | Latest  | Utilities & logging                |
-| jiwer / sacrebleu     | Latest  | Evaluation Metrics                 |
-
----
-
-### ✅ You’re Ready
-
-Your PromptSpeech environment is now **fully reproducible, clean, and Windows-compatible**.
-No Fairseq issues, no build errors — just run:
-
-```bash
-python main.py --mode prepare
+```
+python src/preprocessing/extract_features.py \
+    --input_dir data/raw/librispeech/LibriSpeech/dev-clean \
+    --output_dir data/processed/librispeech/features \
+    --model hubert_base
 ```
 
-Then start implementing **Step 2**.
+---
 
+## 7. Train K-Means on SSL Features
+
+```
+python src/preprocessing/train_kmeans.py \
+    --feature_dir data/processed/librispeech/features \
+    --k 100 \
+    --save_path data/kmeans/kmeans_100.pkl
+```
+
+---
+
+## 8. Quantize SSL Features into Discrete Units
+
+```
+python src/preprocessing/quantize_units.py \
+    --feature_dir data/processed/librispeech/features \
+    --kmeans_path data/kmeans/kmeans_100.pkl \
+    --output_dir data/units/libri/dev-clean
+```
+
+This produces files like:
+
+```
+8842-304647-0009_units.npy
+8842-304647-0010_units.npy
+...
+```
+
+---
+
+## 9. Prepare ASR Transcripts (Required for ASR Training)
+
+LibriSpeech stores transcription text in grouped files:
+
+```
+xxxx-xxxx.trans.txt
+```
+
+Each file contains multiple lines such as:
+
+```
+8842-304647-0009 the transcript text here
+8842-304647-0010 another sentence here
+```
+
+However, ASR training requires per-utterance files:
+
+```
+8842-304647-0009_units.npy
+8842-304647-0009.trans.txt
+```
+
+Use this script (`scripts/prepare_librispeech_transcripts.py`) to generate per-file transcriptions:
+
+```
+import os
+from pathlib import Path
+
+UNITS_DIR = Path("data/units/libri/dev-clean")
+TRANSCRIPT_ROOT = Path("data/raw/librispeech/LibriSpeech/dev-clean")
+
+print("Scanning LibriSpeech transcripts...")
+
+utt2text = {}
+for trans_file in TRANSCRIPT_ROOT.rglob("*.trans.txt"):
+    with open(trans_file, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            parts = line.split(" ", 1)
+            utt_id, text = parts[0], parts[1]
+            utt2text[utt_id] = text
+
+print(f"Loaded {len(utt2text)} transcriptions")
+
+counter = 0
+
+for units_file in UNITS_DIR.rglob("*.npy"):
+    stem = units_file.stem
+    utt_id = stem.replace("_units", "").replace(".units", "")
+
+    if utt_id not in utt2text:
+        print(f"No transcript found for {utt_id}")
+        continue
+
+    out_path = units_file.with_suffix(".trans.txt")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(utt2text[utt_id])
+
+    counter += 1
+
+print(f"\nSuccessfully created {counter} .trans.txt files in {UNITS_DIR}")
+```
+
+Run the script:
+
+```
+python scripts/prepare_librispeech_transcripts.py
+```
+
+You should now have:
+
+```
+8842-304647-0009_units.npy
+8842-304647-0009.trans.txt
+...
+```
+
+---
+
+## 10. Training: Speech Classification (Google Speech Commands)
+
+Configuration: `configs/train_classification.yaml`
+
+```
+task: speech_classification
+gslm_ckpt: pretrained/hubert100_lm/checkpoint_best_fixed.pt
+vocab_size: 100
+prompt_len: 20
+hidden_dim: 1024
+lr: 5e-3
+batch_size: 16
+epochs: 1
+patience: 3
+device: auto
+prompt_type: input
+fast_debug: true
+samples_per_class: 30
+datasets:
+  - name: speech_commands
+    path: data/processed/speech_commands/units
+    num_classes: 36
+save_dir: results/checkpoints/speech_classification
+```
+
+Run:
+
+```
+python -m src.training.train_prompt --config configs/train_classification.yaml
+```
+
+Checkpoint produced:
+
+```
+results/checkpoints/speech_classification/promptspeech_best.pt
+```
+
+---
+
+## 11. Training: ASR
+
+Configuration: `configs/train_asr.yaml`
+
+```
+task: asr
+gslm_ckpt: pretrained/hubert100_lm/checkpoint_best_fixed.pt
+vocab_size: 100
+hidden_dim: 1024
+prompt_len: 50
+lr: 5e-3
+batch_size: 8
+epochs: 1
+patience: 3
+device: auto
+prompt_type: deep
+fast_debug: true
+samples_per_class: 50
+datasets:
+  - name: librispeech_dev_clean
+    path: data/units/libri/dev-clean
+save_dir: results/checkpoints/asr_librispeech
+```
+
+Run:
+
+```
+python -m src.training.train_prompt --config configs/train_asr.yaml
+```
+
+Requirements for success:
+
+1. `*.units.npy` and `*.trans.txt` must exist side-by-side.
+2. Dataset must include all required pairs.
+3. Script automatically loads transcript pairs using `UnitSeqDataset`.
+
+Checkpoint produced:
+
+```
+results/checkpoints/asr_librispeech/promptspeech_best.pt
+```
+
+---
+
+## 12. Results Folder Structure
+
+Expected layout:
+
+```
+results/
+    checkpoints/
+        speech_classification/
+            promptspeech_best.pt
+        asr_librispeech/
+            promptspeech_best.pt
+```
+
+---
+
+## 13. Verification Steps
+
+### Verify transcripts were created:
+
+```
+dir data/units/libri/dev-clean/*.trans.txt
+```
+
+### Verify ASR dataset loads correctly:
+
+```
+python scripts/prepare_librispeech_transcripts.py
+```
+
+Should output non-zero matches.
+
+### Verify training:
+
+```
+python -m src.training.train_prompt --config configs/train_asr.yaml
+```
+
+Should not crash and should begin ASR training.
+
+---
+
+## 14. Troubleshooting
+
+### Issue: No transcript found
+
+Cause: File naming mismatch.
+Fix: Ensure filenames follow LibriSpeech style:
+
+```
+ID:      8842-304647-0009
+Units:   8842-304647-0009_units.npy
+Text:    8842-304647-0009.trans.txt
+```
+
+### Issue: 0 matches created
+
+Cause: `glob` path not recursive.
+Fix: Use `rglob("*.npy")`.
+
+### Issue: Fairseq extension compilation errors
+
+Cause: Windows cannot compile C++ ops.
+Fix: Use torchaudio HuBERT; do not install fairseq from pip.
+
+---
+
+## 15. Summary
+
+This setup guide includes:
+
+1. Environment creation
+2. Dependency installation
+3. LibriSpeech download
+4. Feature extraction
+5. K-Means clustering
+6. Unit quantization
+7. Transcript preparation
+8. Classification training
+9. ASR training
+10. Troubleshooting
+
+This defines the full workflow required to run PromptSpeech end-to-end on Windows or Linux.
+
+---
+
+If you want, I can also generate:
+
+* TRAINING.md
+* INFERENCE.md
+* DATA_PREPARATION.md
+* End-to-end shell scripts
+
+Just ask.
