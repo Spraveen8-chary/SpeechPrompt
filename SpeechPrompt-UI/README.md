@@ -31,23 +31,8 @@ Instead of training separate models for each speech task, **SpeechPrompt** uses:
 
 ## 🏗️ System Architecture
 
-```
-Audio Input
-   ↓
-SpeechBrain ASR
-   ↓
-Whisper ASR (parallel validation)
-   ↓
-Prompt + Task Selection
-   ↓
-(Optional) RAG over selected documents
-   ↓
-Mistral LLM
-   ↓
-Text Output
-   ↓
-TTS (Audio Output)
-```
+<img width="1672" height="1125" alt="image" src="https://github.com/user-attachments/assets/a6efd458-febc-43be-88ab-48bdb04af683" />
+
 
 ---
 
@@ -108,7 +93,7 @@ PromptSpeech/
 
 ```bash
 git clone https://github.com/Spraveen8-chary/SpeechPrompt.git
-cd SpeechPrompt
+cd SpeechPrompt/SpeechPrompt-UI
 ```
 
 ### 2️⃣ Create Virtual Environment
@@ -260,6 +245,9 @@ debug=False
 use_reloader=False
 ```
 
+### [Output Video](https://drive.google.com/file/d/1Q16INZ_SBptGKns-vJ3qWPMjdq6lUD0q/view?usp=sharing)
+
+
 ---
 
 ## 📌 Future Improvements
@@ -278,4 +266,16 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
+
+
+
+
+
+
+
+
+
+
+
 
