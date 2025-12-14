@@ -247,8 +247,7 @@ use_reloader=False
 
 ### Output Video
 
-
-https://github.com/Spraveen8-chary/SpeechPrompt/blob/main/Media1.mp4
+https://drive.google.com/file/d/1Q16INZ_SBptGKns-vJ3qWPMjdq6lUD0q/view?usp=sharing
 
 ---
 
@@ -268,6 +267,7 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
 
 
 
