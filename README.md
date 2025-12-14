@@ -107,8 +107,8 @@ PromptSpeech/
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone [https://github.com/your-username/SpeechPrompt](https://github.com/Spraveen8-chary/SpeechPrompt.git)
-cd SpeechPrompt
+git clone https://github.com/Spraveen8-chary/SpeechPrompt.git
+cd SpeechPrompt/SpeechPrompt-UI
 ```
 
 ### 2️⃣ Create Virtual Environment
@@ -278,4 +278,5 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
 
