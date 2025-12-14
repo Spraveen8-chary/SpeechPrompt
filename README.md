@@ -246,7 +246,10 @@ use_reloader=False
 ```
 
 ### Output Video
-https://github.com/Spraveen8-chary/SpeechPrompt/blob/main/Media1.mp4
+
+
+<video src="[movie.mp4](https://github.com/Spraveen8-chary/SpeechPrompt/blob/main/Media1.mp4)" controls width="600"></video>
+
 
 ---
 
@@ -266,6 +269,7 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
 
 
 
