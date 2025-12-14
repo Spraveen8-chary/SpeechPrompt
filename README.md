@@ -246,8 +246,7 @@ use_reloader=False
 ```
 
 ### Output Video
-<img width="1718" height="841" alt="image" src="https://github.com/user-attachments/assets/684e4649-ae5b-4aa0-8fca-4375e4a5728e" />
-
+https://github.com/Spraveen8-chary/SpeechPrompt/blob/main/Media1.mp4
 
 ---
 
@@ -267,6 +266,7 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
 
 
 
