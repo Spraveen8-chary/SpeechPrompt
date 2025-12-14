@@ -1,0 +1,45 @@
+# ----------- Core Framework -----------
+flask
+gunicorn
+
+# ----------- Audio Processing -----------
+openai-whisper
+faster-whisper        # optional but recommended
+torch
+torchaudio
+numpy
+soundfile
+gTTS
+edge-tts
+
+# ----------- LLM + Transformers -----------
+transformers
+accelerate
+sentencepiece
+sentence-transformers
+
+# ----------- RAG / Vector DB -----------
+langchain
+langchain_community
+chromadb
+faiss-cpu             # optional (for similarity search)
+pypdf
+docx2txt
+
+# ----------- Backend Tools -----------
+ollama
+boto3
+
+# ----------- Testing -----------
+pytest
+
+# ----------- Utility / File Handling -----------
+python-dotenv
+
+# ---------- Optional Speech Models ----------
+speechbrain            # (needed for your SpeechBrain stage)
+
+# ----------- System Dependencies -----------
+# Windows users must install ffmpeg manually:
+# winget install ffmpeg
+ffmpeg-python
