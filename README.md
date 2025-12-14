@@ -247,7 +247,6 @@ use_reloader=False
 
 ### [Output Video](https://drive.google.com/file/d/1Q16INZ_SBptGKns-vJ3qWPMjdq6lUD0q/view?usp=sharing)
 
-https://drive.google.com/file/d/1Q16INZ_SBptGKns-vJ3qWPMjdq6lUD0q/view?usp=sharing
 
 ---
 
@@ -267,6 +266,7 @@ Pull requests are welcome.
 For major changes, please open an issue first.
 
 ---
+
 
 
 
